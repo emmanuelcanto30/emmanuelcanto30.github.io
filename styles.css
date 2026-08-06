@@ -6,6 +6,7 @@
   --muted: #a8b8ca;
   --primary: #7c5cff;
   --primary-2: #33c6a6;
+  --coffee: #ffdd57;
   --border: rgba(255, 255, 255, 0.10);
   --shadow: 0 20px 55px rgba(0, 0, 0, 0.34);
   --max: 1120px;
@@ -26,6 +27,7 @@ html {
 
 body {
   margin: 0;
+
   font-family:
     Inter,
     system-ui,
@@ -69,7 +71,36 @@ a {
 
 
 /* =========================================================
-   ENCABEZADO Y NAVEGACIÓN
+   CONTROL DE IDIOMAS
+   ========================================================= */
+
+[data-lang] {
+  display: none !important;
+}
+
+body.lang-es [data-lang="es"],
+body.lang-en [data-lang="en"] {
+  display: revert !important;
+}
+
+body.lang-es span[data-lang="es"],
+body.lang-en span[data-lang="en"] {
+  display: inline !important;
+}
+
+body.lang-es .feature-language[data-lang="es"],
+body.lang-en .feature-language[data-lang="en"] {
+  display: block !important;
+}
+
+body.lang-es .support-content small[data-lang="es"],
+body.lang-en .support-content small[data-lang="en"] {
+  display: block !important;
+}
+
+
+/* =========================================================
+   ENCABEZADO
    ========================================================= */
 
 .site-header {
@@ -80,6 +111,7 @@ a {
   border-bottom: 1px solid var(--border);
 
   background: rgba(7, 17, 31, 0.82);
+
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -162,13 +194,13 @@ a {
 }
 
 .language-switch button {
+  padding: 7px 11px;
+
   border: 0;
   border-radius: 999px;
 
   background: transparent;
   color: var(--muted);
-
-  padding: 7px 11px;
 
   cursor: pointer;
   font-weight: 700;
@@ -181,66 +213,6 @@ a {
 .language-switch button.active {
   background: var(--primary);
   color: white;
-}
-
-
-/* =========================================================
-   CONTROL DE IDIOMAS
-   ========================================================= */
-
-/*
-  Oculta inicialmente todos los elementos traducibles.
-  !important evita que reglas como ".feature strong"
-  vuelvan a mostrar el idioma incorrecto.
-*/
-
-[data-lang] {
-  display: none !important;
-}
-
-/*
-  Respeta el atributo hidden colocado por JavaScript.
-*/
-
-[hidden] {
-  display: none !important;
-}
-
-/*
-  Muestra únicamente el idioma seleccionado.
-*/
-
-body.lang-es [data-lang="es"],
-body.lang-en [data-lang="en"] {
-  display: revert !important;
-}
-
-/*
-  Los span deben mantenerse en línea.
-*/
-
-body.lang-es span[data-lang="es"],
-body.lang-en span[data-lang="en"] {
-  display: inline !important;
-}
-
-/*
-  Los encabezados strong de las tarjetas deben mostrarse
-  como bloques independientes.
-*/
-
-body.lang-es strong[data-lang="es"],
-body.lang-en strong[data-lang="en"] {
-  display: block !important;
-}
-
-/*
-  Contenedores completos de cada idioma en las tarjetas.
-*/
-
-body.lang-es .feature-language[data-lang="es"],
-body.lang-en .feature-language[data-lang="en"] {
-  display: block !important;
 }
 
 
@@ -270,8 +242,8 @@ body.lang-en .feature-language[data-lang="en"] {
   padding: 7px 12px;
   margin-bottom: 22px;
 
-  border-radius: 999px;
   border: 1px solid rgba(124, 92, 255, 0.38);
+  border-radius: 999px;
 
   background: rgba(124, 92, 255, 0.14);
   color: #d8d0ff;
@@ -362,7 +334,8 @@ h3 {
 
   transition:
     transform 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .btn:hover {
@@ -425,7 +398,7 @@ h3 {
 
 
 /* =========================================================
-   ESTADÍSTICAS DEL HERO
+   ESTADÍSTICAS
    ========================================================= */
 
 .stat-grid {
@@ -465,6 +438,10 @@ section {
   padding: 72px 0;
 }
 
+section[id] {
+  scroll-margin-top: 82px;
+}
+
 .section-head {
   max-width: 780px;
   margin-bottom: 34px;
@@ -477,7 +454,7 @@ section {
 
 
 /* =========================================================
-   TARJETAS DE APLICACIONES
+   APLICACIONES
    ========================================================= */
 
 .cards {
@@ -591,7 +568,9 @@ section {
 
 .feature-icon {
   flex: 0 0 auto;
+
   font-size: 24px;
+  line-height: 1.4;
 }
 
 .feature-content {
@@ -603,19 +582,12 @@ section {
   width: 100%;
 }
 
-.feature strong {
-  display: block;
-  margin-bottom: 4px;
-}
-
-.feature span {
-  color: var(--muted);
-  font-size: 14px;
-}
-
 .feature-language strong {
   display: block;
+
   margin-bottom: 4px;
+
+  font-size: 16px;
 }
 
 .feature-language span {
@@ -671,6 +643,120 @@ section {
 
 
 /* =========================================================
+   APOYO Y DONACIONES
+   ========================================================= */
+
+.support-box {
+  position: relative;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+
+  gap: 28px;
+
+  padding: 42px;
+
+  border: 1px solid rgba(255, 221, 87, 0.28);
+  border-radius: 24px;
+
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(255, 221, 87, 0.14),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(124, 92, 255, 0.16),
+      rgba(51, 198, 166, 0.10)
+    ),
+    var(--surface);
+
+  box-shadow: var(--shadow);
+}
+
+.support-box::before {
+  content: "";
+
+  position: absolute;
+  inset: 0 0 auto 0;
+
+  height: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--coffee),
+      var(--primary),
+      var(--primary-2)
+    );
+}
+
+.support-icon {
+  width: 96px;
+  height: 96px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255, 221, 87, 0.28);
+  border-radius: 28px;
+
+  background: rgba(255, 221, 87, 0.10);
+
+  font-size: 48px;
+  line-height: 1;
+}
+
+.support-content {
+  min-width: 0;
+}
+
+.support-content h2 {
+  margin-bottom: 14px;
+}
+
+.support-content p {
+  max-width: 780px;
+
+  margin: 0 0 24px;
+
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.support-button {
+  border-color: transparent;
+
+  background: var(--coffee);
+  color: #111111;
+
+  box-shadow:
+    0 12px 30px rgba(255, 221, 87, 0.20);
+}
+
+.support-button:hover {
+  border-color: transparent;
+
+  box-shadow:
+    0 16px 34px rgba(255, 221, 87, 0.28);
+}
+
+.coffee-symbol {
+  font-size: 20px;
+}
+
+.support-content small {
+  margin-top: 14px;
+
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* =========================================================
    CONTACTO
    ========================================================= */
 
@@ -687,6 +773,10 @@ section {
     );
 
   text-align: center;
+}
+
+.contact-box p {
+  color: var(--muted);
 }
 
 
@@ -829,36 +919,33 @@ footer {
   .policy-card {
     padding: 22px;
   }
-}
-/* Ocultar español cuando está seleccionado inglés */
-body.lang-en #solutions [data-lang="es"] {
-  display: none !important;
-}
 
-/* Ocultar inglés cuando está seleccionado español */
-body.lang-es #solutions [data-lang="en"] {
-  display: none !important;
-}
+  .support-box {
+    grid-template-columns: 1fr;
 
-/* Mostrar encabezados del idioma seleccionado */
-body.lang-en #solutions strong[data-lang="en"],
-body.lang-es #solutions strong[data-lang="es"] {
-  display: block !important;
-}
+    padding: 30px 22px;
 
-/* Mostrar descripciones del idioma seleccionado */
-body.lang-en #solutions span[data-lang="en"],
-body.lang-es #solutions span[data-lang="es"] {
-  display: block !important;
-}
+    text-align: center;
+  }
 
-/* Compatibilidad con la estructura feature-language */
-body.lang-en #solutions .feature-language[data-lang="en"],
-body.lang-es #solutions .feature-language[data-lang="es"] {
-  display: block !important;
-}
+  .support-icon {
+    width: 82px;
+    height: 82px;
 
-body.lang-en #solutions .feature-language[data-lang="es"],
-body.lang-es #solutions .feature-language[data-lang="en"] {
-  display: none !important;
+    margin: 0 auto;
+
+    font-size: 40px;
+  }
+
+  .support-content p {
+    font-size: 16px;
+  }
+
+  .support-button {
+    width: 100%;
+  }
+
+  .support-content small {
+    text-align: center;
+  }
 }
