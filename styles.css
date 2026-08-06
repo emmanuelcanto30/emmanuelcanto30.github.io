@@ -830,3 +830,35 @@ footer {
     padding: 22px;
   }
 }
+/* Ocultar español cuando está seleccionado inglés */
+body.lang-en #solutions [data-lang="es"] {
+  display: none !important;
+}
+
+/* Ocultar inglés cuando está seleccionado español */
+body.lang-es #solutions [data-lang="en"] {
+  display: none !important;
+}
+
+/* Mostrar encabezados del idioma seleccionado */
+body.lang-en #solutions strong[data-lang="en"],
+body.lang-es #solutions strong[data-lang="es"] {
+  display: block !important;
+}
+
+/* Mostrar descripciones del idioma seleccionado */
+body.lang-en #solutions span[data-lang="en"],
+body.lang-es #solutions span[data-lang="es"] {
+  display: block !important;
+}
+
+/* Compatibilidad con la estructura feature-language */
+body.lang-en #solutions .feature-language[data-lang="en"],
+body.lang-es #solutions .feature-language[data-lang="es"] {
+  display: block !important;
+}
+
+body.lang-en #solutions .feature-language[data-lang="es"],
+body.lang-es #solutions .feature-language[data-lang="en"] {
+  display: none !important;
+}
