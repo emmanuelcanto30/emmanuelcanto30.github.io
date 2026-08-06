@@ -497,4 +497,25 @@ body.lang-en span[data-lang="en"] {
   .policy-card {
     padding: 22px;
   }
+  /* Oculta completamente el contenedor del idioma no seleccionado */
+body.lang-es .feature-language[data-lang="en"],
+body.lang-en .feature-language[data-lang="es"],
+.feature-language[hidden] {
+  display: none !important;
+}
+
+/* Organización del contenido de cada tarjeta */
+.feature-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.feature-language strong {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.feature-language span {
+  display: block;
+}
 }
